@@ -1,0 +1,23 @@
+{
+  "name": "chat-nodejs",
+  "version": "0.1.0",
+  "description": "A chat app made with Node.js and Express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "node",
+    "nodejs",
+    "express",
+    "expressjs",
+    "javascript"
+  ],
+  "author": "Federico Tejedor Llorente",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
