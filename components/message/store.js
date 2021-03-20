@@ -23,10 +23,18 @@ const getMessages = async () => {
     return messages;
 };
 
+// Patch the message content from the DB
+const updateMessage = async (id, message) => {
+    const foundMessage = await Model.findById(id);
+    foundMessage.message = message;
+    const newMessage = await foundMessage.save();
+    return newMessage;
+};
+
 module.exports = {
     add: addMessage,
     list: getMessages,
+    update: updateMessage
     // get
-    // update?
     // delete
 };

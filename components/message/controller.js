@@ -23,7 +23,19 @@ const getMessages = () => {
     });
 };
 
+const updateMessage = (id, message) => {
+    return new Promise(async (resolve, reject) => {
+        if (!id || !message) {
+            console.error('[messageController] There is no message ID or content in the request');
+            return reject('Invalid data');
+        }
+        const result = await store.update(id, message);
+        return resolve(result);
+    });
+};
+
 module.exports = {
     addMessage,
-    getMessages
+    getMessages,
+    updateMessage
 };

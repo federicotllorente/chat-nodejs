@@ -25,4 +25,15 @@ router.post('/', (req, res) => {
         });
 });
 
+router.patch('/:id', (req, res) => {
+    controller.updateMessage(req.params.id, req.body.message)
+        .then(data => {
+            response.success(req, res, data, 200);
+        })
+        .catch(error => {
+            console.error(`[messageNetwork] Error in controller`);
+            response.error(req, res, error, 500);
+        });
+});
+
 module.exports = router;
