@@ -11,15 +11,19 @@ db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // Post to the DB the message
 const addMessage = message => {
-    // list.push(message);
     const myMessage = new Model(message);
     myMessage.save();
 };
 
 // Get from the DB all the messages
-const getMessages = async () => {
-    // return list;
-    const messages = await Model.find();
+const getMessages = async filterUser => {
+    let filter = {};
+    if (filterUser) {
+        // This regular expresion allows to filter the user
+        // no matter if it's typed with or without uppercases
+        filter = { user: new RegExp(filterUser, 'i') };
+    }
+    const messages = await Model.find(filter);
     return messages;
 };
 
