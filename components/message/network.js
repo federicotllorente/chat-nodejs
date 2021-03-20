@@ -1,25 +1,28 @@
 const express = require('express');
 const response = require('../../network/response');
-
+const controller = require('./controller');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    console.log(req.headers);
-    res.header({
-        "custom-header": "This is a custom header"
-    });
-    response.success(req, res, 'Message list');
+    controller.getMessages()
+        .then(data => {
+            response.success(req, res, data, 200);
+        })
+        .catch(error => {
+            console.error(`[messageNetwork] Error in database`);
+            response.error(req, res, error, 500);
+        });
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
-    console.log(req.query);
-    if (req.query.error == 'ok') {
-        console.error(`[response error] ${req.query.error}`);
-        response.error(req, res, 'Unexpected error', 400);
-    } else {
-        response.success(req, res, 'Message sent correctly!', 201);
-    }
+    controller.addMessage(req.body.user, req.body.message)
+        .then(data => {
+            response.success(req, res, data, 201);
+        })
+        .catch(error => {
+            console.error(`[messageNetwork] Error in controller`);
+            response.error(req, res, error, 400);
+        });
 });
 
 module.exports = router;

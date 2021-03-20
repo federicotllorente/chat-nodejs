@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const router = require('./components/message/network');
 const router = require('./network/routes');
 
 const app = express();
