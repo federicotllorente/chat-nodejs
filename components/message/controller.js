@@ -34,8 +34,26 @@ const updateMessage = (id, message) => {
     });
 };
 
+const deleteMessage = id => {
+    return new Promise((resolve, reject) => {
+        if (!id) {
+            console.error('[messageController] There is no message ID in the request');
+            return reject('Invalid data');
+        }
+        resolve(store.remove(id))
+            .then(() => {
+                resolve();
+            })
+            .catch(error => {
+                console.error('[messageController] Internal error');
+                reject(error);
+            });
+    });
+};
+
 module.exports = {
     addMessage,
     getMessages,
-    updateMessage
+    updateMessage,
+    deleteMessage
 };

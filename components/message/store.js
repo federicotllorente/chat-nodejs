@@ -35,10 +35,31 @@ const updateMessage = async (id, message) => {
     return newMessage;
 };
 
+// Check if the message already exists, so it can be deleted
+const checkExistency = async id => {
+    const result = await Model.exists({
+        _id: id
+    });
+    return result;
+};
+
+// Delete a message from the DB
+const removeMessage = async id => {
+    const existsAlready = await checkExistency(id);
+    if (existsAlready) {
+        return Model.deleteOne({
+            _id: id
+        });
+    } else {
+        console.error('[db] This message does not exist anymore');
+        return null;
+    }
+};
+
 module.exports = {
     add: addMessage,
     list: getMessages,
-    update: updateMessage
+    update: updateMessage,
+    remove: removeMessage
     // get
-    // delete
 };

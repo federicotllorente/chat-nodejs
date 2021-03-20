@@ -37,4 +37,15 @@ router.patch('/:id', (req, res) => {
         });
 });
 
+router.delete('/:id', (req, res) => {
+    controller.deleteMessage(req.params.id)
+        .then(data => {
+            response.success(req, res, data, 200);
+        })
+        .catch(error => {
+            console.error(`[messageNetwork] Error in controller`);
+            response.error(req, res, error, 500);
+        });
+});
+
 module.exports = router;
