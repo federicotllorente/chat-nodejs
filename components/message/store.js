@@ -1,13 +1,10 @@
 require('dotenv').config();
-const db = require('mongoose');
+const connect = require('../../db');
 const Model = require('./model');
 
+// Connecting to the DB
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-
-db.Promise = global.Promise;
-db.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log(`[db] Database successfully connected`))
-    .catch(error => console.error(`[db] ${error}`));
+connect(uri);
 
 // Post to the DB the message
 const addMessage = message => {
