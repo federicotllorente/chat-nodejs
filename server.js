@@ -4,6 +4,7 @@ const app = express();
 // in order to connect the API with a WebSockets server
 const server = require('http').Server(app);
 
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const socket = require('./socket');
 const db = require('./db');
@@ -12,6 +13,9 @@ const router = require('./network/routes');
 // Connecting to the DB
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 db(uri);
+
+// Enabling all CORS requests
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
