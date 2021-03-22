@@ -7,6 +7,10 @@ const mySchema = new Schema({
         type: Schema.ObjectId,
         ref: 'users'
     },
+    chat: {
+        type: Schema.ObjectId,
+        ref: 'chats'
+    },
     message: {
         type: String,
         required: true,

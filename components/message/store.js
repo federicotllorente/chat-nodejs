@@ -13,13 +13,11 @@ const addMessage = message => {
 };
 
 // Get from the DB all the messages
-const getMessages = filterUser => {
+const getMessages = (filterChat) => {
     return new Promise((resolve, reject) => {
         let filter = {};
-        if (filterUser) {
-            // This regular expresion allows to filter the user
-            // no matter if it's typed with or without uppercases
-            filter = { user: new RegExp(filterUser, 'i') };
+        if (filterChat) {
+            filter = { chat: filterChat };
         }
         return resolve(Model.find(filter)
             .populate('user')
