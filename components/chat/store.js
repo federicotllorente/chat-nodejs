@@ -11,9 +11,13 @@ const createChat = chat => {
     myChat.save();
 };
 
-const getChats = () => {
+const getChats = filterUser => {
     return new Promise((resolve, reject) => {
-        return resolve(Model.find()
+        let filter = {};
+        if (filterUser) {
+            filter = { users: filterUser };
+        }
+        return resolve(Model.find(filter)
             .populate('users')
             .populate('messages')
             // .exec((error, populated) => {

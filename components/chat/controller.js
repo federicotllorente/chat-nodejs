@@ -5,6 +5,9 @@ const createChat = users => {
         if (!users) {
             console.error('[chatController] There are no users in the request');
             return reject('Invalid data');
+        } else if (users.length < 2) {
+            console.error('[chatController] There are no enough users in the request to create a new chat');
+            return reject('Invalid data');
         }
         const newChat = {
             users,
@@ -16,9 +19,9 @@ const createChat = users => {
     });
 };
 
-const getChats = () => {
+const getChats = userId => {
     return new Promise((resolve, reject) => {
-        return resolve(store.list());
+        return resolve(store.list(userId));
     });
 };
 
