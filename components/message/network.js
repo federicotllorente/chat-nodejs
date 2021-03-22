@@ -8,7 +8,7 @@ router.post('/', (req, res) => {
         .then(data => response.success(req, res, data, 201))
         .catch(error => {
             console.error('[messageNetwork] Error in controller trying to send a message');
-            response.error(req, res, error, 400);
+            response.error(req, res, error, 500);
         });
 });
 

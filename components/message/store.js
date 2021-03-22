@@ -13,7 +13,7 @@ const addMessage = message => {
 };
 
 // Get from the DB all the messages
-const getMessages = async filterUser => {
+const getMessages = filterUser => {
     return new Promise((resolve, reject) => {
         let filter = {};
         if (filterUser) {
