@@ -1,10 +1,5 @@
 require('dotenv').config();
-const connect = require('../../db');
 const Model = require('./model');
-
-// Connecting to the DB
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-connect(uri);
 
 // Post to the DB the message
 const addMessage = message => {

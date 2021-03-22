@@ -1,4 +1,5 @@
 const store = require('./store');
+const { socket } = require('../../socket');
 
 const appUrl = 'localhost:3000/app';
 
@@ -20,6 +21,7 @@ const addMessage = (user, chat, message, file) => {
             file: fileUrl
         };
         store.add(fullMessage);
+        socket.io.emit('message', fullMessage);
         return resolve(fullMessage);
     });
 };
