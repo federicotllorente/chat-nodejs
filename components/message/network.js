@@ -4,13 +4,24 @@ const response = require('../../network/response');
 const controller = require('./controller');
 const router = express.Router();
 
+// To manage the filename and the extension
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/files/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()} ${file.originalname}`);
+    }
+});
+
 // To upload files in a message
 const upload = multer({
-    dest: 'uploads/'
+    // dest: 'public/files/'
+    storage: storage
 });
 
 router.post('/', upload.single('file'), (req, res) => {
-    controller.addMessage(req.body.user, req.body.chat, req.body.message)
+    controller.addMessage(req.body.user, req.body.chat, req.body.message, req.file)
         .then(data => response.success(req, res, data, 201))
         .catch(error => {
             console.error('[messageNetwork] Error in controller trying to send a message');

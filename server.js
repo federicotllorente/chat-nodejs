@@ -7,5 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 router(app);
 
-app.listen(3000);
-console.log('The App is listening in http://localhost:3000');
+// See statics in /app
+app.use('/app', express.static('public'));
+
+app.listen(3000, () => console.log('The App is listening in http://localhost:3000'));

@@ -2,7 +2,7 @@
 /node_modules
 
 # Uploads
-/uploads
+/public/files
 
 # Misc
 .DS_Store

@@ -1,16 +1,23 @@
 const store = require('./store');
 
-const addMessage = (user, chat, message) => {
+const appUrl = 'localhost:3000/app';
+
+const addMessage = (user, chat, message, file) => {
     return new Promise((resolve, reject) => {
         if (!user || !chat || !message) {
             console.error('[messageController] There is no user, chat or message in the request');
             return reject('Invalid data');
         }
+        let fileUrl = '';
+        if (file) {
+            fileUrl = `${appUrl}/files/${file.filename}`;
+        }
         const fullMessage = {
             user,
             chat,
             message,
-            date: new Date()
+            date: new Date(),
+            file: fileUrl
         };
         store.add(fullMessage);
         return resolve(fullMessage);
