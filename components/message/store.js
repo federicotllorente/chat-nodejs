@@ -1,4 +1,3 @@
-require('dotenv').config();
 const Model = require('./model');
 
 // Post to the DB the message

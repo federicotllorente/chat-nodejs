@@ -1,4 +1,3 @@
-require('dotenv').config();
 const Model = require('./model');
 
 const createChat = chat => {

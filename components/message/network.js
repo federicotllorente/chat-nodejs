@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const response = require('../../network/response');
@@ -7,7 +8,7 @@ const router = express.Router();
 // To manage the filename and the extension
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/files/');
+        cb(null, `public/${process.env.FILES_ROUTE}/`);
     },
     filename: (req, file, cb) => {
         cb(null, `${Date.now()} ${file.originalname}`);

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 // Creating an HTTP server with the Node native module 'http'
@@ -24,7 +25,9 @@ socket.connect(server);
 router(app);
 
 // See statics in /app
-app.use('/app', express.static('public'));
+app.use(`/${process.env.PUBLIC_ROUTE}`, express.static('public'));
 
 // Listening connections
-server.listen(3000, () => console.log('The App is listening in http://localhost:3000'));
+server.listen(process.env.PORT, () => {
+    console.log(`The App is listening in ${process.env.HOST}:${process.env.PORT}`);
+});

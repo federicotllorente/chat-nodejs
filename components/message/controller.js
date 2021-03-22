@@ -1,7 +1,6 @@
+require('dotenv').config();
 const store = require('./store');
 const { socket } = require('../../socket');
-
-const appUrl = 'localhost:3000/app';
 
 const addMessage = (user, chat, message, file) => {
     return new Promise((resolve, reject) => {
@@ -11,7 +10,7 @@ const addMessage = (user, chat, message, file) => {
         }
         let fileUrl = '';
         if (file) {
-            fileUrl = `${appUrl}/files/${file.filename}`;
+            fileUrl = `${process.env.HOST}:${process.env.PORT}/${process.env.PUBLIC_ROUTE}/${process.env.FILES_ROUTE}/${file.filename}`;
         }
         const fullMessage = {
             user,
