@@ -14,15 +14,26 @@ const addMessage = message => {
 
 // Get from the DB all the messages
 const getMessages = async filterUser => {
-    let filter = {};
-    if (filterUser) {
-        // This regular expresion allows to filter the user
-        // no matter if it's typed with or without uppercases
-        filter = { user: new RegExp(filterUser, 'i') };
-    }
-    const messages = await Model.find(filter);
-    return messages;
-};
+    return new Promise((resolve, reject) => {
+        let filter = {};
+        if (filterUser) {
+            // This regular expresion allows to filter the user
+            // no matter if it's typed with or without uppercases
+            filter = { user: new RegExp(filterUser, 'i') };
+        }
+        return resolve(Model.find(filter)
+            .populate('user')
+            // .exec((error, populated) => {
+            //     if (error) {
+            //         console.error('[db] The user was not found in the database');
+            //         return reject(error);
+            //     }
+            //     return resolve(populated);
+            // })
+            .catch(error => reject(error))
+        );
+    });
+}
 
 // Patch the message content from the DB
 const updateMessage = async (id, message) => {

@@ -12,7 +12,6 @@ const addMessage = (user, message) => {
             date: new Date()
         };
         store.add(fullMessage);
-        console.log('[messageController] Message sent!');
         return resolve(fullMessage);
     });
 };
