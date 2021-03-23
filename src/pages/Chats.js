@@ -1,12 +1,10 @@
 import { hot } from 'react-hot-loader/root';
 import React from 'react';
 
-import Layout from './Layout';
-
-const App = () => {
+const Chats = () => {
     return (
-        <Layout />
+        <h1>These are the chats</h1>
     );
 };
 
-export default hot(App);
+export default hot(Chats);

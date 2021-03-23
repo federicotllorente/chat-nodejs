@@ -5,6 +5,20 @@ const app = express();
 // in order to connect the API with a WebSockets server
 const server = require('http').Server(app);
 
+const webpack = require('webpack');
+
+if (process.env.NODE_ENV === 'development') {
+    const webpackConfig = require('./webpack.config');
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
+
+    const compiler = webpack(webpackConfig);
+    const webpackServerConfig = { port: process.env.PORT, hot: true };
+
+    app.use(webpackDevMiddleware(compiler, webpackServerConfig));
+    app.use(webpackHotMiddleware(compiler));
+}
+
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const socket = require('./socket');
