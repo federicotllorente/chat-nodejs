@@ -1,13 +1,13 @@
-exports.success = (req, res, message, status) => {
+exports.success = (req, res, data, status) => {
     res.status(status || 200).send({
         error: '',
-        body: message
+        body: data
     });
 };
 
-exports.error = (req, res, message, status) => {
+exports.error = (req, res, error, status) => {
     res.status(status || 500).send({
-        error: message,
+        error: error,
         body: ''
     });
 };

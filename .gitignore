@@ -1,8 +1,8 @@
 # Dependencies
 /node_modules
 
-# Uploads
-/public/files
+# Public (Webpack compiled files)
+/public
 
 # Misc
 .DS_Store
