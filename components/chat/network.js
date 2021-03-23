@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
 
 // Get (list) all the chats
 router.get('/:userId', (req, res) => {
-    controller.getChats(req.query.userId)
+    controller.getChats(req.params.userId)
         .then(data => response.success(req, res, data, 200))
         .catch(error => {
             console.error('[chatNetwork] Error in the database trying to list the chats');

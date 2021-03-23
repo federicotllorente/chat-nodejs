@@ -7,10 +7,7 @@ const createChat = chat => {
 
 const getChats = filterUser => {
     return new Promise((resolve, reject) => {
-        let filter = {};
-        if (filterUser) {
-            filter = { users: filterUser };
-        }
+        const filter = { users: { _id: filterUser } };
         return resolve(Model.find(filter)
             .populate('users')
             .populate('messages')
