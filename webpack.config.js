@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -11,8 +12,8 @@ module.exports = {
     entry: ['./src/index.js', clientConfig],
     mode: 'development',
     output: {
-        path: path.join(__dirname, "/public"),
-        filename: "index_bundle.js"
+        path: path.join(__dirname, '/public'),
+        filename: 'app.js'
     },
     module: {
         rules: [
@@ -20,7 +21,7 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader",
+                    loader: 'babel-loader',
                 },
             },
             {
@@ -53,11 +54,14 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new Dotenv(),
         new HtmlWebPackPlugin({
             hash: true,
             filename: "index.html",  // Target HTML
             template: "./src/index.html" // Source HTML
         }),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin({
+            filename: 'app.css'
+        })
     ]
 }
