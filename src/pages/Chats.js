@@ -1,6 +1,6 @@
 import { hot } from 'react-hot-loader/root';
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import useGetData from '../hooks/useGetData';
 import ChatListItem from '../components/ChatListItem';
@@ -19,20 +19,20 @@ const Chats = () => {
     useEffect(() => {
         fetchData(`${api}/${userId}`);
     }, []);
-    if (loading) {
-        return (
-            <h2>Loading...</h2>
-        );
-    }
+    if (loading) (<h2>Loading...</h2>);
     return (
         <div className="chats">
             <h1>Chat App <span>by <a href="https://github.com/federicotllorente" target="_blank" rel="noreferrer">Federico Tejedor Llorente</a></span></h1>
+            <h3><Link to="/">Back to Users</Link></h3>
             <h2>Chats</h2>
             <p>Your conversations</p>
             <div className="chats__list">
                 {data && data.map(el => (
                     <ChatListItem key={el._id} el={el} userId={userId} />
                 ))}
+                {!data && (
+                    <h3>Oh! It seems that you don't have any chat yet!</h3>
+                )}
             </div>
         </div>
     );
