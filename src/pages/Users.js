@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader/root';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import useGetUsers from '../hooks/useGetUsers';
+import useGetData from '../hooks/useGetData';
 
 const api = `${process.env.HOST}:${process.env.PORT}/user`;
 
@@ -11,7 +11,7 @@ const Users = () => {
         data,
         error,
         fetchData
-    } = useGetUsers();
+    } = useGetData();
     useEffect(() => {
         fetchData(api);
     }, []);

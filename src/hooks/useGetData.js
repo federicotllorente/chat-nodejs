@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useGetUsers = () => {
+const useGetData = () => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState(undefined);
     const [error, setError] = useState(null);
@@ -27,4 +27,4 @@ const useGetUsers = () => {
     };
 };
 
-export default useGetUsers;
+export default useGetData;
