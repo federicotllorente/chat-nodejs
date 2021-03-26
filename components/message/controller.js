@@ -1,8 +1,7 @@
 require('dotenv').config();
 const store = require('./store');
-const { socket } = require('../../socket');
 
-const addMessage = (user, chat, message, file) => {
+const addMessage = (user, chat, message, date, file) => {
     return new Promise((resolve, reject) => {
         if (!user || !chat || !message) {
             console.error('[messageController] There is no user, chat or message in the request');
@@ -16,11 +15,10 @@ const addMessage = (user, chat, message, file) => {
             user,
             chat,
             message,
-            date: new Date(),
+            date: date || new Date(),
             file: fileUrl
         };
         store.add(fullMessage);
-        socket.io.emit('message', fullMessage);
         return resolve(fullMessage);
     });
 };

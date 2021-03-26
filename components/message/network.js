@@ -22,7 +22,7 @@ const upload = multer({
 });
 
 router.post('/', upload.single('file'), (req, res) => {
-    controller.addMessage(req.body.user, req.body.chat, req.body.message, req.file)
+    controller.addMessage(req.body.user, req.body.chat, req.body.message, req.body.date, req.file)
         .then(data => response.success(req, res, data, 201))
         .catch(error => {
             console.error('[messageNetwork] Error in controller trying to send a message');

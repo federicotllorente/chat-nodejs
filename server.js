@@ -24,6 +24,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const db = require('./db');
 const router = require('./network/routes');
+const sendMessage = require('./network/sendMessage');
 
 // Connecting to the DB
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
@@ -35,18 +36,20 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// socket.connect(server);
 const io = socketIo(server);
 router(app);
 
+// Handling Websockets
 io.on('connection', socket => {
     console.log(`New socket connected: ${socket.id}`);
     socket.on('disconnect', () => {
         console.log(`Socket disconnected: ${socket.id}`);
     });
     socket.on('new message', data => {
+        // Show the message in the chat
         io.emit('receive message', data);
-        console.log(`[server.js] ${data}`);
+        // Post the message in the DB
+        sendMessage(data);
     });
 });
 
