@@ -30,7 +30,7 @@ const Chats = () => {
                 {data && data.map(el => (
                     <ChatListItem key={el._id} el={el} userId={userId} />
                 ))}
-                {!data && (
+                {(!data && error) && (
                     <h3>Oh! It seems that you don't have any chat yet!</h3>
                 )}
             </div>

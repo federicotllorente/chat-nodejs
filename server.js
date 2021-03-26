@@ -3,9 +3,10 @@ const express = require('express');
 const app = express();
 // Creating an HTTP server with the Node native module 'http'
 // in order to connect the API with a WebSockets server
-const server = require('http').Server(app);
+const server = require('http').createServer(app);
 
 const webpack = require('webpack');
+const socketIo = require('socket.io');
 
 if (process.env.NODE_ENV === 'development') {
     const webpackConfig = require('./webpack.config');
@@ -21,7 +22,6 @@ if (process.env.NODE_ENV === 'development') {
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const socket = require('./socket');
 const db = require('./db');
 const router = require('./network/routes');
 
@@ -35,11 +35,20 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-socket.connect(server);
+// socket.connect(server);
+const io = socketIo(server);
 router(app);
 
-// See statics in /app
-app.use(`/${process.env.PUBLIC_ROUTE}`, express.static('public'));
+io.on('connection', socket => {
+    console.log(`New socket connected: ${socket.id}`);
+    socket.on('disconnect', () => {
+        console.log(`Socket disconnected: ${socket.id}`);
+    });
+    socket.on('new message', data => {
+        io.emit('receive message', data);
+        console.log(`[server.js] ${data}`);
+    });
+});
 
 // Listening connections
 server.listen(process.env.PORT, () => {
