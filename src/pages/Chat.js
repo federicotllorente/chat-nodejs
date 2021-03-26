@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import useGetData from '../hooks/useGetData';
 import useGetMessages from '../hooks/useGetMessages';
+import ChatMessages from '../components/ChatMessages';
 
 const api_chat = `${process.env.HOST}:${process.env.PORT}/chat`;
 const api_messages = `${process.env.HOST}:${process.env.PORT}/message?chat=`;
@@ -50,29 +51,7 @@ const Chat = () => {
                         return (<span key={user._id}>{user.name}</span>);
                     }
                 }))}</h2>
-                <div className="chat__messages">
-                    {messages && messages.map(el => {
-                        if (el.user._id == userId) {
-                            return (
-                                <div key={el._id} className="chat__messages__message chat__messages__message--own_message">
-                                    <p>{el.message}</p>
-                                    <span>
-                                        {`${el.date.split('T')[0].split('-')[1]}/${el.date.split('T')[0].split('-')[2]}/${el.date.split('T')[0].split('-')[0]} at ${el.date.split('T')[1].split(':')[0]}:${el.date.split('T')[1].split(':')[1]}`}
-                                    </span>
-                                </div>
-                            );
-                        } else {
-                            return (
-                                <div key={el._id} className="chat__messages__message">
-                                    <p>{el.message}</p>
-                                    <span>
-                                        {`${el.date.split('T')[0].split('-')[1]}/${el.date.split('T')[0].split('-')[2]}/${el.date.split('T')[0].split('-')[0]} at ${el.date.split('T')[1].split(':')[0]}:${el.date.split('T')[1].split(':')[1]}`}
-                                    </span>
-                                </div>
-                            );
-                        }
-                    })}
-                </div>
+                <ChatMessages messages={messages} userId={userId} />
                 <div className="chat__inputs">
                     <form action="">
                         <input type="text" name="new_message" id="new_message" placeholder="Write something..." />
