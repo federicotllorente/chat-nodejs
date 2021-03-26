@@ -1,9 +1,10 @@
 import { hot } from 'react-hot-loader/root';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import useGetData from '../hooks/useGetData';
 import useGetMessages from '../hooks/useGetMessages';
+import useHandleChat from '../hooks/useHandleChat';
 import ChatMessages from '../components/ChatMessages';
 
 // New socket connection
@@ -30,8 +31,13 @@ const Chat = () => {
         messagesError,
         fetchMessages
     } = useGetMessages();
-    const [newMessages, setNewMessages] = useState(undefined);
-    const [newMessage, setNewMessage] = useState('');
+    const {
+        newMessages,
+        setNewMessages,
+        newMessage,
+        handleChange,
+        handleSubmit
+    } = useHandleChat(userId, chatId, socket);
 
     useEffect(() => {
         fetchData(`${api_chat}/${userId}`); // Get chat info
@@ -46,24 +52,6 @@ const Chat = () => {
             }
         });
     });
-
-    const handleChange = (e) => {
-        setNewMessage(e.target.value);
-    };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const fullMessage = {
-            user: userId,
-            chat: chatId,
-            message: newMessage,
-            date: new Date(),
-            file: '' // Add the file uploading functionality later
-        };
-        if (newMessage) {
-            socket.emit('new message', fullMessage);
-            setNewMessage('');
-        }
-    };
 
     if (loading || loadingMessages) (<h2>Loading...</h2>);
     if (data) {
