@@ -1,0 +1,47 @@
+.users {
+    padding: 20px;
+    &__title {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        h1 {
+            padding-bottom: 5px;
+            font-size: $h1FontSize * 0.8;
+        }
+    }
+    &__subtitle {
+        padding: 20px 0 10px;
+        h2 {
+            padding-bottom: 5px;
+        }
+    }
+    &__list {
+        &__item {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: $primaryColorWOpacity;
+            border-radius: 10px;
+            &:hover {
+                background-color: $primaryColor;
+                a {
+                    color: $altLightColor;
+                }
+            }
+            a {
+                color: $darkColor;
+                &:hover {
+                    background-color: initial;
+                }
+            }
+            h3 {
+                font-size: $mainFontSize;
+                padding-bottom: 5px;
+            }
+            p {
+                span {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

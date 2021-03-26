@@ -1,0 +1,132 @@
+.chat {
+    padding: 20px;
+    &__title {
+        padding: 20px;
+        width: 100vw;
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        background-color: $secondaryColor;
+        color: $altLightColor;
+        box-shadow: 0 0 20px 0 $secondaryColorWOpacity;
+        &__logo {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            h1 {
+                font-size: $h2FontSize;
+            }
+            h3 {
+                padding-right: 20px;
+                font-size: $mainFontSize;
+                a {
+                    margin-left: 5px;
+                    color: $lightColor;
+                }
+            }
+        }
+        &__subtitle {
+            padding: 20px 0 0;
+            h2 {
+                font-size: $mainFontSize;
+                text-align: center;
+            }
+        }
+    }
+    &__messages {
+        padding: 104px 0 79px;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        &__message {
+            width: fit-content;
+            max-width: -webkit-fill-available;
+            padding: 6px 10px;
+            margin: 3px 0;
+            background-color: rgba($color: $primaryColor, $alpha: 0.15);
+            border-radius: 10px 10px 10px 0;
+            span {
+                font-size: $mainFontSize * 0.8;
+                color: $darkColorWOpacity;
+            }
+            &--own_message {
+                align-self: flex-end;
+                text-align: right;
+                background-color: rgba($color: $darkColor, $alpha: 0.15);
+                border-radius: 10px 10px 0 10px;
+            }
+        }
+    }
+    &__inputs {
+        padding: 20px;
+        width: 100vw;
+        position: fixed;
+        z-index: 2;
+        bottom: 0;
+        left: 0;
+        box-sizing: border-box;
+        background-color: $secondaryColor;
+        color: $altLightColor;
+        box-shadow: 0 0 20px 0 $secondaryColorWOpacity;
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            input {
+                width: -webkit-fill-available;
+                padding: 10px;
+                margin-right: 10px;
+                background-color: $lightColor;
+                border: 2px solid $altLightColor;
+                border-radius: 10px;
+                font-family: $mainFontFamily;
+                font-size: $mainFontSize;
+                color: $darkColor;
+                &::placeholder {
+                    color: $darkColorWOpacity;
+                }
+            }
+            button {
+                margin-left: 10px;
+                background-color: transparent;
+                border: none;
+                font-family: $titleFontFamily;
+                font-size: $mainFontSize;
+                color: $lightColor;
+                &:hover {
+                    color: $primaryColor;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpointTablet) {
+    .chat {
+        &__title {
+            &__logo {
+                h3 {
+                    font-size: $mobileFontSize;
+                }
+            }
+        }
+        &__messages {
+            &__message {
+                span {
+                    font-size: $mobileFontSize * 0.8;
+                }
+            }
+        }
+        &__inputs {
+            form {
+                input, button {
+                    font-size: $mobileFontSize;
+                }
+            }
+        }
+    }
+}

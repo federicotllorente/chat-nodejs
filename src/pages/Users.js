@@ -22,9 +22,14 @@ const Users = () => {
     }
     return (
         <div className="users">
-            <h1>Chat App <span>by <a href="https://github.com/federicotllorente" target="_blank" rel="noreferrer">Federico Tejedor Llorente</a></span></h1>
-            <h2>Users</h2>
-            <p>Who are you?</p>
+            <div className="users__title">
+                <h1>Chat App</h1>
+                <span>by <a href="https://github.com/federicotllorente" target="_blank" rel="noreferrer">Federico Tejedor Llorente</a></span>
+            </div>
+            <div className="users__subtitle">
+                <h2>Users</h2>
+                <p>Who are you?</p>
+            </div>
             <div className="users__list">
                 {data && data.map(el => (
                     <div key={el._id} className="users__list__item">

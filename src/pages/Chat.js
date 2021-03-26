@@ -52,29 +52,45 @@ const Chat = () => {
             }
         });
     });
+    useEffect(() => {
+        return () => {
+            socket.disconnect(socket => {
+                console.log(`Socket disconnected manually: ${socket.id}`);
+                if (newMessages) {
+                    setNewMessages(undefined);
+                }
+            });
+        };
+    }, []);
 
     if (loading || loadingMessages) (<h2>Loading...</h2>);
     if (data) {
         const currentChatData = data.find(el => el._id === chatId);
         return (
             <div className="chat">
-                <h1>Chat App <span>by <a href="https://github.com/federicotllorente" target="_blank" rel="noreferrer">Federico Tejedor Llorente</a></span></h1>
-                <h3><Link to={`/${userId}`}>Back to Chats</Link></h3>
-                <h2>{currentChatData.users.length > 2 ? (
-                    <span>{currentChatData.users.filter(user => user._id !== userId).map((user, index, array) => {
-                        if (index >= 2) {
-                            return (<span key={user._id}> and {array.length - 2} more</span>);
-                        } else if (index == 1) {
-                            return (<span key={user._id}>{user.name}</span>);
-                        } else if (index == 0) {
-                            return (<span key={user._id}>{user.name}, </span>);
-                        }
-                    })}</span>
-                ) : (currentChatData.users.map(user => {
-                    if (user._id !== userId) {
-                        return (<span key={user._id}>{user.name}</span>);
-                    }
-                }))}</h2>
+                <div className="chat__title">
+                    <div className="chat__title__logo">
+                        <h3>👈 <Link to={`/${userId}`}>Back to Chats</Link></h3>
+                        <h1>Chat App</h1>
+                    </div>
+                    <div className="chat__title__subtitle">
+                        <h2>{currentChatData.users.length > 2 ? (
+                            <span>{currentChatData.users.filter(user => user._id !== userId).map((user, index, array) => {
+                                if (index >= 2) {
+                                    return (<span key={user._id}> and {array.length - 2} more</span>);
+                                } else if (index == 1) {
+                                    return (<span key={user._id}>{user.name}</span>);
+                                } else if (index == 0) {
+                                    return (<span key={user._id}>{user.name}, </span>);
+                                }
+                            })}</span>
+                        ) : (currentChatData.users.map(user => {
+                            if (user._id !== userId) {
+                                return (<span key={user._id}>{user.name}</span>);
+                            }
+                        }))}</h2>
+                    </div>
+                </div>
                 <ChatMessages newMessages={newMessages} messages={messages} userId={userId} />
                 <div className="chat__inputs">
                     <form action="" onSubmit={handleSubmit}>

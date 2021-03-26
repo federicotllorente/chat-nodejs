@@ -22,10 +22,15 @@ const Chats = () => {
     if (loading) (<h2>Loading...</h2>);
     return (
         <div className="chats">
-            <h1>Chat App <span>by <a href="https://github.com/federicotllorente" target="_blank" rel="noreferrer">Federico Tejedor Llorente</a></span></h1>
-            <h3><Link to="/">Back to Users</Link></h3>
-            <h2>Chats</h2>
-            <p>Your conversations</p>
+            <div className="chats__title">
+                <h1>Chat App</h1>
+                <span>by <a href="https://github.com/federicotllorente" target="_blank" rel="noreferrer">Federico Tejedor Llorente</a></span>
+            </div>
+            <div className="chats__subtitle">
+                <h3>👈 <Link to="/">Back to Users</Link></h3>
+                <h2>Chats</h2>
+                <p>Your conversations</p>
+            </div>
             <div className="chats__list">
                 {data && data.map(el => (
                     <ChatListItem key={el._id} el={el} userId={userId} />
