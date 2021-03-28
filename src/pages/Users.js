@@ -1,7 +1,9 @@
 import { hot } from 'react-hot-loader/root';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import useGetData from '../hooks/useGetData';
+import SkeletonLoader from '../components/SkeletonLoader';
 
 const api = `${process.env.HOST}:${process.env.PORT}/user`;
 
@@ -15,11 +17,7 @@ const Users = () => {
     useEffect(() => {
         fetchData(api);
     }, []);
-    if (loading) {
-        return (
-            <h2>Loading...</h2>
-        );
-    }
+    if (loading) (<SkeletonLoader />);
     return (
         <div className="users">
             <div className="users__title">
@@ -27,8 +25,13 @@ const Users = () => {
                 <span>by <a href="https://github.com/federicotllorente" target="_blank" rel="noreferrer">Federico Tejedor Llorente</a></span>
             </div>
             <div className="users__subtitle">
-                <h2>Users</h2>
-                <p>Who are you?</p>
+                <div className="users__subtitle__text">
+                    <h2>Users</h2>
+                    <p>Who are you?</p>
+                </div>
+                <div className="users__subtitle__add_user">
+                    <Link to="/add-user">Add a new user</Link>
+                </div>
             </div>
             <div className="users__list">
                 {data && data.map(el => (

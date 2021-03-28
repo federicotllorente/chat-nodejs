@@ -1,11 +1,11 @@
 const store = require('./store');
 
-const addUser = name => {
+const addUser = (name, status) => {
     if (!name) {
         console.error('[userController] There is no name in the request');
         return Promise.reject('Invalid data');
     }
-    const user = { name, status: 'Available' };
+    const user = { name, status: status || 'Available' };
     return store.add(user);
 };
 

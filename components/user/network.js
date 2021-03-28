@@ -4,7 +4,7 @@ const controller = require('./controller');
 const router = express.Router();
 
 router.post('/', (req, res) => {
-    controller.addUser(req.body.name)
+    controller.addUser(req.body.name, req.body.status)
         .then(data => response.success(req, res, data, 201))
         .catch(error => {
             console.error('[userNetwork] Error in controller trying to create a user');

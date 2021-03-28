@@ -11,8 +11,26 @@
     }
     &__subtitle {
         padding: 20px 0 10px;
-        h2 {
-            padding-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &__text {
+            h2 {
+                padding-bottom: 5px;
+            }
+        }
+        &__add_user {
+            a {
+                padding: 10px;
+                border-radius: 10px;
+                border: 2px solid $primaryColor;
+                background-color: transparent;
+                transition: 0.2s;
+                &:hover {
+                    background-color: $primaryColor;
+                    color: $altLightColor;
+                }
+            }
         }
     }
     &__list {

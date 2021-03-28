@@ -54,13 +54,16 @@ const Chat = () => {
     });
     useEffect(() => {
         return () => {
-            socket.removeAllListeners('receive message'); // Prevents an app memory leak
+            // Removes the 'socket.on' listener (preventing an app memory leak)
+            socket.removeAllListeners('receive message');
+            // Disconnects the socket
             socket.disconnect(socket => {
                 console.log(`Socket disconnected manually: ${socket.id}`);
             });
             if (newMessages) {
                 setNewMessages(undefined);
             }
+            // Reconnects the socket
             socket.connect();
         };
     }, []);
