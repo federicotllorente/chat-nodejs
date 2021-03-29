@@ -8,9 +8,9 @@
         top: 0;
         left: 0;
         box-sizing: border-box;
-        background-color: $secondaryColor;
+        background-color: $primaryColor;
         color: $altLightColor;
-        box-shadow: 0 0 20px 0 $secondaryColorWOpacity;
+        box-shadow: 0 0 20px 0 $primaryColorWOpacity;
         &__logo {
             display: flex;
             flex-direction: row;
@@ -47,7 +47,7 @@
             max-width: -webkit-fill-available;
             padding: 6px 10px;
             margin: 3px 0;
-            background-color: rgba($color: $primaryColor, $alpha: 0.15);
+            background-color: rgba($color: $secondaryColor, $alpha: 0.15);
             border-radius: 10px 10px 10px 0;
             span {
                 font-size: $mainFontSize * 0.8;
@@ -69,9 +69,9 @@
         bottom: 0;
         left: 0;
         box-sizing: border-box;
-        background-color: $secondaryColor;
+        background-color: $primaryColor;
         color: $altLightColor;
-        box-shadow: 0 0 20px 0 $secondaryColorWOpacity;
+        box-shadow: 0 0 20px 0 $primaryColorWOpacity;
         form {
             display: flex;
             justify-content: center;

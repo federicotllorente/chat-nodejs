@@ -1,10 +1,10 @@
 // Colors
-$primaryColor: #b32442;
-$primaryColorWOpacity: #b3244360;
-$altPrimaryColor: #760933;
-$altPrimaryColorWOpacity: #7609335d;
-$secondaryColor: #042a38;
-$secondaryColorWOpacity: #042a385d;
+$primaryColor: #33678a;
+$primaryColorWOpacity: #33678a5d;
+$altPrimaryColor: #78a6c9;
+$altPrimaryColorWOpacity: #78a6c95d;
+$secondaryColor: #e65c4f;
+$secondaryColorWOpacity: #e65c4f5d;
 $darkColor: #202020;
 $darkColorWOpacity: #2020205b;
 $altDarkColor: #000000;
@@ -73,6 +73,7 @@ body {
 
 // Components import
 @import '_users.scss';
+@import '_adduser.scss';
 @import '_chats.scss';
 @import '_chat.scss';
 @import '_skeleton.scss';
