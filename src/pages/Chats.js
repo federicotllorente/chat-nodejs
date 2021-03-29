@@ -36,15 +36,19 @@ const Chats = () => {
                     <p>Your conversations</p>
                 </div>
                 <div className="chats__subtitle__add_chat">
-                    <Link to="/add-chat">Add a new chat</Link>
+                    <Link to={`/${userId}/add-chat`}>Add a new chat</Link>
                 </div>
             </div>
             <div className="chats__list">
                 {data && data.map(el => (
                     <ChatListItem key={el._id} el={el} userId={userId} />
                 ))}
-                {(!data && error) && (
-                    <h3>Oh! It seems that you don't have any chat yet!</h3>
+                {(!data) && (
+                    <React.Fragment>
+                        <h3>Oh! It seems that you don't have any chat yet!</h3>
+                        <h3>C'mon! <Link to={`/${userId}/add-chat`}>Add a new conversation</Link> and start chatting!</h3>
+                        <Link className="chats__create_chat" to={`/${userId}/add-group`}>Add a new chat</Link>
+                    </React.Fragment>
                 )}
             </div>
         </div>

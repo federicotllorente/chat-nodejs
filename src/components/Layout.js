@@ -15,8 +15,8 @@ const Layout = () => {
             <Switch>
                 <Route exact path="/" component={Users} />
                 <Route exact path="/add-user" component={AddUser} />
-                <Route exact path="/add-chat" component={AddChat} />
                 <Route exact path="/:userId" component={Chats} />
+                <Route exact path="/:userId/add-chat" component={AddChat} />
                 <Route exact path="/:userId/:chatId" component={Chat} />
                 <Route component={NotFound} />
             </Switch>

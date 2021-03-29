@@ -1,4 +1,4 @@
-.chats {
+.add_chat {
     padding: 20px;
     &__title {
         display: flex;
@@ -20,27 +20,8 @@
     }
     &__subtitle {
         padding: 10px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        &__text {
-            h2 {
-                padding-bottom: 5px;
-            }
-        }
-        &__add_chat {
-            a {
-                padding: 10px;
-                font-family: $titleFontFamily;
-                border-radius: 10px;
-                border: 2px solid $primaryColor;
-                background-color: transparent;
-                transition: 0.2s;
-                &:hover {
-                    background-color: $primaryColor;
-                    color: $altLightColor;
-                }
-            }
+        h2 {
+            padding-bottom: 5px;
         }
     }
     &__list {
@@ -75,9 +56,11 @@
 }
 
 @media (max-width: $breakpointTablet) {
-    .chats__subtitle {
-        h3 {
-            font-size: $mobileFontSize;
+    .add_chat {
+        &__back_button {
+            h3 {
+                font-size: $mobileFontSize;
+            }
         }
     }
 }
