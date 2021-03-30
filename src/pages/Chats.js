@@ -43,10 +43,10 @@ const Chats = () => {
                 {data && data.map(el => (
                     <ChatListItem key={el._id} el={el} userId={userId} />
                 ))}
-                {(!data) && (
+                {(data && data.length == 0) && (
                     <React.Fragment>
                         <h3>Oh! It seems that you don't have any chat yet!</h3>
-                        <h3>C'mon! <Link to={`/${userId}/add-chat`}>Add a new conversation</Link> and start chatting!</h3>
+                        <p>C'mon! <Link to={`/${userId}/add-chat`}>Add a new conversation</Link> and start chatting!</p>
                         <Link className="chats__create_chat" to={`/${userId}/add-group`}>Add a new chat</Link>
                     </React.Fragment>
                 )}

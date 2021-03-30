@@ -3,10 +3,10 @@ import { useState } from 'react';
 const useHandleChat = (userId, chatId, socket) => {
     const [newMessages, setNewMessages] = useState(undefined);
     const [newMessage, setNewMessage] = useState('');
-    const handleChange = (e) => {
+    const handleChange = e => {
         setNewMessage(e.target.value);
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
         const fullMessage = {
             user: userId,

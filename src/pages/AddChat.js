@@ -47,11 +47,11 @@ const AddChat = () => {
                         </Link>
                     </div>
                 ))}
-                {(!foundChats) && (
+                {(foundChats && foundChats.length == 0) && (
                     <React.Fragment>
                         <h3>Oh! It seems that you already have a chat with every user in the App!</h3>
-                        <h3>Maybe you would like to <Link to={`/${userId}/add-group`}>create a new group</Link> 👥</h3>
-                        <Link className="add_chat__create_group" to={`/${userId}/add-group`}>Create a new group</Link>
+                        {/* <h3>Maybe you would like to <Link to={`/${userId}/add-group`}>create a new group</Link> 👥</h3>
+                        <Link className="add_chat__create_group" to={`/${userId}/add-group`}>Create a new group</Link> */}
                     </React.Fragment>
                 )}
             </div>

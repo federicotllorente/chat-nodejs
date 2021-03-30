@@ -9,16 +9,22 @@
   },
   "keywords": [
     "chat",
+    "chat app",
     "node",
     "nodejs",
     "express",
     "expressjs",
+    "socket.io",
+    "socketio",
     "javascript",
     "react",
+    "reactjs",
     "react-dom",
     "react-router",
     "webpack",
-    "babel"
+    "babel",
+    "mongodb",
+    "mongodb atlas"
   ],
   "author": "Federico Tejedor Llorente",
   "license": "ISC",

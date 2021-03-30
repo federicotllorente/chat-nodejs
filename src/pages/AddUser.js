@@ -1,11 +1,62 @@
 import { hot } from 'react-hot-loader/root';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-// import SkeletonLoader from '../components/SkeletonLoader';
+import SkeletonLoader from '../components/SkeletonLoader';
+
+const api = `${process.env.HOST}:${process.env.PORT}/user`;
+
+const usePostUser = () => {
+    const [name, setName] = useState('');
+    const [status, setStatus] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const postUser = async (api_url, data) => {
+        setLoading(true);
+        const result = await fetch(api_url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        return result.json();
+    };
+    return {
+        name, setName,
+        status, setStatus,
+        loading, setLoading,
+        error, setError,
+        postUser
+    };
+};
 
 const AddUser = () => {
-    // if (loading) (<SkeletonLoader />);
+    const {
+        name, setName,
+        status, setStatus,
+        loading, setLoading,
+        error, setError,
+        postUser
+    } = usePostUser();
+    const handleChangeName = e => setName(e.target.value);
+    const handleChangeStatus = e => setStatus(e.target.value);
+    const handleSubmitNewUser = e => {
+        e.preventDefault();
+        const userData = { name, status };
+        postUser(api, userData)
+            .then(data => setLoading(false))
+            .catch(error => setError(error));
+    };
+    useEffect(() => {
+        return () => {
+            setName('');
+            setStatus('');
+            setLoading(false);
+            setError(null);
+        };
+    }, []);
+    if (loading) (<SkeletonLoader />);
     return (
         <div className="add_user">
             <div className="add_user__title">
@@ -19,23 +70,29 @@ const AddUser = () => {
                 <h2>Create a new user</h2>
                 <p>Start chatting with other users!</p>
                 <div className="add_user__subtitle__inputs">
-                    <input
-                        type="text"
-                        name="new_user_name"
-                        id="new_user_name"
-                        required
-                        placeholder="Your name"
-                    />
-                    <input
-                        type="text"
-                        name="new_user_status"
-                        id="new_user_status"
-                        placeholder="Your status (optional)"
-                    />
-                    <div className="add_user__subtitle__inputs__buttons">
-                        <button id="add">Create user</button>
-                        <button id="cancel">Cancel</button>
-                    </div>
+                    <form onSubmit={handleSubmitNewUser}>
+                        <input
+                            type="text"
+                            name="new_user_name"
+                            id="new_user_name"
+                            onChange={handleChangeName}
+                            value={name}
+                            required
+                            placeholder="Your name"
+                        />
+                        <input
+                            type="text"
+                            name="new_user_status"
+                            id="new_user_status"
+                            onChange={handleChangeStatus}
+                            value={status}
+                            placeholder="Your status (optional)"
+                        />
+                        <div className="add_user__subtitle__inputs__buttons">
+                            <button id="add">Create user</button>
+                            <Link to="/">Cancel</Link>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

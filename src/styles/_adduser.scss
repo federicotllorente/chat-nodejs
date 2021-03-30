@@ -52,19 +52,29 @@
                     transition: 0.2s;
                     &#add {
                         margin-right: 5px;
+                        color: $primaryColor;
                         border: 2px solid $primaryColor;
                         &:hover {
                             background-color: $primaryColor;
                             color: $altLightColor;
                         }
                     }
-                    &#cancel {
-                        margin-left: 5px;
-                        border: 2px solid $altPrimaryColor;
-                        &:hover {
-                            background-color: $altPrimaryColor;
-                            color: $altLightColor;
-                        }
+                }
+                a {
+                    width: 50%;
+                    padding: 10px;
+                    margin-left: 5px;
+                    font-family: $titleFontFamily;
+                    font-size: $mainFontSize;
+                    border: 2px solid $altPrimaryColor;
+                    border-radius: 10px;
+                    background-color: transparent;
+                    text-align: center;
+                    line-height: normal;
+                    transition: 0.2s;
+                    &:hover {
+                        background-color: $altPrimaryColor;
+                        color: $altLightColor;
                     }
                 }
             }
@@ -81,7 +91,7 @@
         }
         &__subtitle {
             &__inputs {
-                input, button {
+                input, button, a {
                     font-size: $mobileFontSize;
                 }
             }
