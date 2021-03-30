@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const useFindNewChats = userId => {
-    const [foundChats, setFoundChats] = useState(undefined);
+    const [foundUsers, setFoundUsers] = useState(undefined);
     const findNewChats = (allUsers, allChats) => {
         let currentUsersWithChat = [];
         let currentUsersWithoutChat = [];
@@ -19,9 +19,9 @@ const useFindNewChats = userId => {
                 currentUsersWithoutChat.push(user);
             }
         });
-        setFoundChats(currentUsersWithoutChat);
+        setFoundUsers(currentUsersWithoutChat);
     };
-    return { foundChats, findNewChats };
+    return { foundUsers, findNewChats };
 };
 
 export default useFindNewChats;

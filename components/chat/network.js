@@ -23,4 +23,24 @@ router.get('/:userId', (req, res) => {
         });
 });
 
+router.delete('/:id', (req, res) => {
+    if (!req.query.byUser) {
+        // Delete by chat ID
+        controller.deleteChat(req.params.id)
+            .then(data => response.success(req, res, data, 200))
+            .catch(error => {
+                console.error('[chatNetwork] Error in controller trying to delete a chat');
+                response.error(req, res, error, 500);
+            });
+    } else if (req.query.byUser) {
+        // Delete by user ID
+        controller.deleteChatByUser(req.params.id)
+            .then(data => response.success(req, res, data, 200))
+            .catch(error => {
+                console.error('[chatNetwork] Error in controller trying to delete a chat');
+                response.error(req, res, error, 500);
+            });
+    }
+});
+
 module.exports = router;

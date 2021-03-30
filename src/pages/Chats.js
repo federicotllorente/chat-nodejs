@@ -47,7 +47,7 @@ const Chats = () => {
                     <React.Fragment>
                         <h3>Oh! It seems that you don't have any chat yet!</h3>
                         <p>C'mon! <Link to={`/${userId}/add-chat`}>Add a new conversation</Link> and start chatting!</p>
-                        <Link className="chats__create_chat" to={`/${userId}/add-group`}>Add a new chat</Link>
+                        <Link className="chats__create_chat" to={`/${userId}/add-chat`}>Add a new chat</Link>
                     </React.Fragment>
                 )}
             </div>

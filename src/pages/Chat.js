@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useGetData from '../hooks/useGetData';
@@ -43,6 +43,11 @@ const Chat = () => {
         fetchData(`${api_chat}/${userId}`); // Get chat info
         fetchMessages(`${api_messages}${chatId}`); // Get messages
     }, []);
+    const [currentChatData, setCurrentChatData] = useState(undefined);
+    useEffect(() => {
+        if (!data) return;
+        setCurrentChatData(data.find(el => el._id === chatId));
+    }, [data]);
     useEffect(() => {
         socket.on('receive message', data => {
             if (newMessages) {
@@ -60,17 +65,16 @@ const Chat = () => {
             socket.disconnect(socket => {
                 console.log(`Socket disconnected manually: ${socket.id}`);
             });
-            if (newMessages) {
-                setNewMessages(undefined);
-            }
+            if (currentChatData) setCurrentChatData(undefined);
+            if (newMessages) setNewMessages(undefined);
             // Reconnects the socket
             socket.connect();
         };
     }, []);
 
-    const currentChatData = useMemo(() => data && data.find(el => el._id === chatId), [data]);
+    // const currentChatData = useMemo(() => data && data.find(el => el._id === chatId), [data]);
     if (loading || loadingMessages) (<SkeletonLoader />);
-    if (data) {
+    if (currentChatData) {
         return (
             <ChatViews
                 messages={messages}

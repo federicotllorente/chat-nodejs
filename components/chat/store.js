@@ -23,7 +23,53 @@ const getChats = filterUser => {
     });
 };
 
+// Check if the chat already exists, so it can be deleted
+const checkExistency = async id => {
+    const result = await Model.exists({
+        _id: id
+    });
+    return result;
+};
+
+const removeChatById = async id => {
+    const existsAlready = await checkExistency(id);
+    if (existsAlready) {
+        return Model.deleteOne({
+            _id: id
+        });
+    } else {
+        console.error('[db] This chat does not exist anymore');
+        return null;
+    }
+};
+
+// Check if the chat already exists, so it can be deleted (by its user ID)
+const checkExistencyByUserId = async userId => {
+    const result = await Model.exists({
+        users: {
+            _id: userId
+        }
+    });
+    return result;
+};
+
+const removeChatByUserId = async userId => {
+    const existsAlready = await checkExistencyByUserId(userId);
+    if (existsAlready) {
+        return Model.deleteMany({
+            users: {
+                _id: userId
+            }
+        });
+    } else {
+        console.error('[db] These chats do not exist anymore');
+        return null;
+    }
+};
+
 module.exports = {
     add: createChat,
-    list: getChats
+    list: getChats,
+    removeById: removeChatById,
+    removeByUser: removeChatByUserId
 };

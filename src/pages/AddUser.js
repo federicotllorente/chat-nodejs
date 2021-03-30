@@ -2,34 +2,10 @@ import { hot } from 'react-hot-loader/root';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import usePostUser from '../hooks/usePostUser';
 import SkeletonLoader from '../components/SkeletonLoader';
 
 const api = `${process.env.HOST}:${process.env.PORT}/user`;
-
-const usePostUser = () => {
-    const [name, setName] = useState('');
-    const [status, setStatus] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const postUser = async (api_url, data) => {
-        setLoading(true);
-        const result = await fetch(api_url, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        return result.json();
-    };
-    return {
-        name, setName,
-        status, setStatus,
-        loading, setLoading,
-        error, setError,
-        postUser
-    };
-};
 
 const AddUser = () => {
     const {

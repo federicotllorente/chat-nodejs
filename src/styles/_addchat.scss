@@ -25,22 +25,24 @@
         }
     }
     &__list {
+        display: flex;
+        flex-direction: column;
         &__item {
             padding: 10px;
             margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
             background-color: $primaryColorWOpacity;
+            color: $darkColor;
+            border: none;
             border-radius: 10px;
+            font-family: $mainFontFamily;
+            font-size: $mainFontSize;
             &:hover {
                 background-color: $primaryColor;
-                a {
-                    color: $altLightColor;
-                }
-            }
-            a {
-                color: $darkColor;
-                &:hover {
-                    background-color: initial;
-                }
+                color: $altLightColor;
             }
             h3 {
                 font-size: $mainFontSize;
@@ -59,6 +61,11 @@
     .add_chat {
         &__back_button {
             h3 {
+                font-size: $mobileFontSize;
+            }
+        }
+        &__list {
+            &__item {
                 font-size: $mobileFontSize;
             }
         }

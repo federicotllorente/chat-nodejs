@@ -25,7 +25,43 @@ const getChats = userId => {
     });
 };
 
+const deleteChat = id => {
+    return new Promise((resolve, reject) => {
+        if (!id) {
+            console.error('[chatController] There is no chat ID in the request');
+            return reject('Invalid data');
+        }
+        resolve(store.removeById(id))
+            .then(() => {
+                resolve();
+            })
+            .catch(error => {
+                console.error('[chatController] Internal error');
+                reject(error);
+            });
+    });
+};
+
+const deleteChatByUser = userId => {
+    return new Promise((resolve, reject) => {
+        if (!userId) {
+            console.error('[chatController] There is no user ID in the request');
+            return reject('Invalid data');
+        }
+        resolve(store.removeByUser(userId))
+            .then(() => {
+                resolve();
+            })
+            .catch(error => {
+                console.error('[chatController] Internal error');
+                reject(error);
+            });
+    });
+};
+
 module.exports = {
     createChat,
-    getChats
+    getChats,
+    deleteChat,
+    deleteChatByUser
 };
