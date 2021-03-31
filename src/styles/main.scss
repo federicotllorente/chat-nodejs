@@ -26,6 +26,29 @@ $breakpointTablet: 820px;
 $breakpointDesktop: 1024px;
 
 // Mixins
+@mixin fixedHeader {
+    width: 100vw;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: $primaryColor;
+    color: $altLightColor;
+    box-shadow: 0 0 20px 0 $primaryColorWOpacity;
+    h1 {
+        padding-bottom: 5px;
+        font-size: $h1FontSize * 0.8;
+    }
+    a {
+        color: $lightColor;
+        font-weight: 500;
+    }
+}
 
 // Reset default styles
 * {
@@ -38,6 +61,8 @@ html {
 }
 
 body {
+    max-width: 600px;
+    margin: 0 auto;
     color: $darkColor;
     font-family: $mainFontFamily;
     font-size: $mainFontSize;
@@ -62,6 +87,10 @@ body {
         font-family: $titleFontFamily;
         font-size: $h2FontSize;
         font-weight: 500;
+    }
+    button:hover {
+        transition: 0.2s;
+        cursor: pointer;
     }
 }
 

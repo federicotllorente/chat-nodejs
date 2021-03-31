@@ -11,6 +11,7 @@ const ChatViews = props => {
     const userId = props.userId;
     const handleChange = props.handleChange;
     const handleSubmit = props.handleSubmit;
+    const chatBottom = props.chatBottom;
     return (
         <div className="chat">
             <div className="chat__title">
@@ -43,6 +44,7 @@ const ChatViews = props => {
                     <button>Send</button>
                 </form>
             </div>
+            <div ref={chatBottom}></div>
         </div>
     );
 };

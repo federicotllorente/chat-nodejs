@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import useGetData from '../hooks/useGetData';
@@ -16,6 +16,7 @@ const api_messages = `${process.env.HOST}:${process.env.PORT}/message?chat=`;
 
 const Chat = () => {
     const currentPath = useParams();
+    const chatBottom = useRef(null);
     const userId = currentPath.userId;
     const chatId = currentPath.chatId;
 
@@ -38,16 +39,20 @@ const Chat = () => {
         handleChange,
         handleSubmit
     } = useHandleChat(userId, chatId, socket);
+    const [currentChatData, setCurrentChatData] = useState(undefined);
 
     useEffect(() => {
         fetchData(`${api_chat}/${userId}`); // Get chat info
         fetchMessages(`${api_messages}${chatId}`); // Get messages
     }, []);
-    const [currentChatData, setCurrentChatData] = useState(undefined);
     useEffect(() => {
         if (!data) return;
         setCurrentChatData(data.find(el => el._id === chatId));
     }, [data]);
+    useEffect(() => {
+        if (!chatBottom.current) return;
+        chatBottom.current.scrollIntoView({ behavior: 'smooth' });
+    });
     useEffect(() => {
         socket.on('receive message', data => {
             if (newMessages) {
@@ -72,7 +77,6 @@ const Chat = () => {
         };
     }, []);
 
-    // const currentChatData = useMemo(() => data && data.find(el => el._id === chatId), [data]);
     if (loading || loadingMessages) (<SkeletonLoader />);
     if (currentChatData) {
         return (
@@ -84,6 +88,7 @@ const Chat = () => {
                 userId={userId}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
+                chatBottom={chatBottom}
             />
         );
     }
