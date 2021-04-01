@@ -4,13 +4,19 @@ const Dotenv = require('dotenv-webpack');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// Refresh the page with a 2sec interval
-const clientConfig = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true';
+const isDev = (process.env.NODE_ENV === 'development');
+let entry = ['./src/index.js'];
+
+if (isDev) {
+    // Refresh the page with a 2sec interval
+    const clientConfig = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true';
+    entry.push(clientConfig);
+}
 
 module.exports = {
     devtool: 'source-map',
-    entry: ['./src/index.js', clientConfig],
-    mode: 'development',
+    entry,
+    mode: process.env.NODE_ENV,
     output: {
         path: path.join(__dirname, '/public'),
         filename: 'app.js'
@@ -53,7 +59,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        isDev ? new webpack.HotModuleReplacementPlugin() : () => { },
         new Dotenv(),
         new HtmlWebPackPlugin({
             hash: true,

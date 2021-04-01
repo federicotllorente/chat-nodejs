@@ -7,6 +7,7 @@ const server = require('http').createServer(app);
 
 const webpack = require('webpack');
 const socketIo = require('socket.io');
+const helmet = require('helmet');
 
 if (process.env.NODE_ENV === 'development') {
     const webpackConfig = require('./webpack.config');
@@ -18,6 +19,11 @@ if (process.env.NODE_ENV === 'development') {
 
     app.use(webpackDevMiddleware(compiler, webpackServerConfig));
     app.use(webpackHotMiddleware(compiler));
+} else {
+    app.use(express.static('public')); // To serve the UI made with React
+    app.use(helmet()); // To set up Helmet's crossdomain middleware
+    app.use(helmet.permittedCrossDomainPolicies()); // This prevents loading content with Adobe Flash and Acrobat
+    app.disable('x-powered-by'); // This prevents possible attacks to certain dependencies that the App is using
 }
 
 const cors = require('cors');
