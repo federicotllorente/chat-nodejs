@@ -6,7 +6,7 @@ import useGetData from '../hooks/useGetData';
 import ChatListItem from '../components/ChatListItem';
 import SkeletonLoader from '../components/SkeletonLoader';
 
-const api = `${process.env.HOST}:${process.env.PORT}/chat`;
+const api = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/chat` : `${process.env.HOST}/chat`;
 
 const Chats = () => {
     const currentPath = useParams();

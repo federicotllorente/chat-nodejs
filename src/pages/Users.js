@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useGetData from '../hooks/useGetData';
 import SkeletonLoader from '../components/SkeletonLoader';
 
-const api = `${process.env.HOST}:${process.env.PORT}/user`;
+const api = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/user` : `${process.env.HOST}/user`;
 
 const Users = () => {
     const {
