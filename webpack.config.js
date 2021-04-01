@@ -49,7 +49,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|gif|jpg)$/,
+                test: /\.(png|gif|jpg|svg)$/,
                 use: [
                     {
                         loader: 'file-loader'
@@ -64,7 +64,8 @@ module.exports = {
         new HtmlWebPackPlugin({
             hash: true,
             filename: "index.html",  // Target HTML
-            template: "./src/index.html" // Source HTML
+            template: "./src/index.html", // Source HTML
+            favicon: "./src/components/Favicon.svg" // Favicon
         }),
         new MiniCssExtractPlugin({
             filename: 'app.css'
