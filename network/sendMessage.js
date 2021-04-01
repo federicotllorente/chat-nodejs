@@ -4,8 +4,8 @@ const http = require('http');
 const sendMessage = message => {
     const data = JSON.stringify(message);
     const options = {
-        hostname: process.env.HOST_NAME,
-        port: process.env.PORT,
+        hostname: process.env.HOST_NAME || window.location.host,
+        port: process.env.PORT || 3000,
         path: '/message',
         method: 'POST',
         headers: {
