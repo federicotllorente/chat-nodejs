@@ -10,8 +10,10 @@ import useFetchNewChat from '../hooks/useFetchNewChat';
 import SkeletonLoader from '../components/SkeletonLoader';
 import AddChatViews from './AddChatViews';
 
-const api_users = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/user` : `${process.env.HOST}/user`;
-const api_chats = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/chat` : `${process.env.HOST}/chat`;
+const currentURL = process.env.HOST || window.location.origin;
+
+const api_users = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/user` : `${currentURL}/user`;
+const api_chats = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/chat` : `${currentURL}/chat`;
 
 const AddChat = () => {
     const currentPath = useParams();

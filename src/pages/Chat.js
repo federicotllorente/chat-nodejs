@@ -11,8 +11,10 @@ import ChatViews from './ChatViews';
 import io from 'socket.io-client';
 const socket = io('/');
 
-const api_chat = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/chat` : `${process.env.HOST}/chat`;
-const api_messages = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/message?chat=` : `${process.env.HOST}/message?chat=`;
+const currentURL = process.env.HOST || window.location.origin;
+
+const api_chat = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/chat` : `${currentURL}/chat`;
+const api_messages = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/message?chat=` : `${currentURL}/message?chat=`;
 
 const Chat = () => {
     const currentPath = useParams();
