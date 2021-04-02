@@ -6,6 +6,20 @@ const useHandleChat = (userId, chatId, socket) => {
     const handleChange = e => {
         setNewMessage(e.target.value);
     };
+    const sendMessage = async message => {
+        const currentURL = window.location.origin;
+        const api = process.env.NODE_ENV === 'development' ?
+            `${process.env.HOST}:${process.env.PORT}/message` :
+            `${currentURL}/message`;
+        const result = await fetch(api, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(message)
+        });
+        return result.json();
+    };
     const handleSubmit = e => {
         e.preventDefault();
         const fullMessage = {
@@ -17,6 +31,7 @@ const useHandleChat = (userId, chatId, socket) => {
         };
         if (newMessage) {
             socket.emit('new message', fullMessage);
+            sendMessage(fullMessage); // Post the message in the DB
             setNewMessage('');
         }
     };

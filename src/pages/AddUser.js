@@ -1,15 +1,16 @@
 import { hot } from 'react-hot-loader/root';
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import usePostUser from '../hooks/usePostUser';
 import SkeletonLoader from '../components/SkeletonLoader';
 
-const currentURL = process.env.HOST || window.location.origin;
+const currentURL = window.location.origin;
 
 const api = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/user` : `${currentURL}/user`;
 
 const AddUser = () => {
+    const history = useHistory();
     const {
         name, setName,
         status, setStatus,
@@ -23,7 +24,11 @@ const AddUser = () => {
         e.preventDefault();
         const userData = { name, status };
         postUser(api, userData)
-            .then(data => setLoading(false))
+            .then(data => {
+                setLoading(false);
+                const newPath = `/${data.body._id}`;
+                history.push(newPath);
+            })
             .catch(error => setError(error));
     };
     useEffect(() => {

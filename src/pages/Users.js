@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useGetData from '../hooks/useGetData';
 import SkeletonLoader from '../components/SkeletonLoader';
 
-const currentURL = process.env.HOST || window.location.origin;
+const currentURL = window.location.origin;
 
 const api = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/user` : `${currentURL}/user`;
 

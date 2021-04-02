@@ -10,7 +10,7 @@ import useFetchNewChat from '../hooks/useFetchNewChat';
 import SkeletonLoader from '../components/SkeletonLoader';
 import AddChatViews from './AddChatViews';
 
-const currentURL = process.env.HOST || window.location.origin;
+const currentURL = window.location.origin;
 
 const api_users = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/user` : `${currentURL}/user`;
 const api_chats = process.env.NODE_ENV === 'development' ? `${process.env.HOST}:${process.env.PORT}/chat` : `${currentURL}/chat`;
