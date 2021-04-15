@@ -10,6 +10,8 @@ For the backend, I used MongoDB with its could database [MongoDB Atlas](https://
 
 This project started as an 'only backend App' as the project for the ['Backend with Nodejs' course](https://platzi.com/clases/backend-js/) from [Platzi](https://platzi.com/). After completing the course, I continued developing the App to make it more solid and 'usable'. I installed Webpack, Babel, React and other dependencies to start developing the frontend.
 
+If you want to try this Web App, you can go to [http://chat.federicotllorente.work/](http://chat.federicotllorente.work/) where I deployed it. I hope you like it!
+
 ## Starting with this project
 
 Once cloned the repository, all you need to do is start the App with `npm run start` while you're in the project folder. A new browser tab/window will be opened in the *localhost* with the port 3000. If not, just open in your browser [http://localhost:3000](http://localhost:3000).
@@ -25,6 +27,8 @@ Para el backend, utilicé MongoDB con su sistema de bases de datos en la nube [M
 ## Más acerca de este proyecto
 
 Este proyecto comenzó como una "aplicación solo de backend" como proyecto para el [curso de "Backend con Nodejs"](https://platzi.com/clases/backend-js/) de [Platzi](https://platzi.com/). Luego de culminar el curso, continué desarrollando la App para hacerla más sólida y "utilizable". Instalé Webpack, Babel, React y otras dependencias para comenzar a desarrollar el frontend.
+
+Si quieres testear esta app web, puedes ir a [http://chat.federicotllorente.work/](http://chat.federicotllorente.work/) donde la desplegué. ¡Espero que te guste!
 
 ## Comenzando con este proyecto
 
